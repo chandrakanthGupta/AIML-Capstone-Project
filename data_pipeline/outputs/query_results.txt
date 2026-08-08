@@ -1,0 +1,228 @@
+====================================================
+ZEPTO DATA & AI PLATFORM - SQL QUERY RESULTS OUTPUT
+Total Categories: 3 | Total Books: 133
+====================================================
+
+----------------------------------------------------
+Query: Query 1 (SELECT, WHERE, ORDER BY, LIMIT) - Top 5 Most Expensive In-Stock Books
+----------------------------------------------------
+SQL Query:
+SELECT title, price_gbp, price_inr, rating 
+        FROM books 
+        WHERE in_stock = 1 
+        ORDER BY price_gbp DESC 
+        LIMIT 5;
+
+Results:
+('Boar Island (Anna Pigeon #19)', 59.48, 6275.14, 3)
+("The No. 1 Ladies' Detective Agency (No. 1 Ladies' Detective Agency #1)", 57.7, 6087.35, 4)
+('El Deafo', 57.62, 6078.91, 5)
+('Ajin: Demi-Human, Volume 1 (Ajin: Demi-Human #1)', 57.06, 6019.83, 4)
+('Giant Days, Vol. 1 (Giant Days #1-4)', 56.76, 5988.18, 4)
+
+[Total Rows: 5]
+
+----------------------------------------------------
+Query: Query 2 (DISTINCT) - Distinct Star Ratings Present
+----------------------------------------------------
+SQL Query:
+SELECT DISTINCT rating 
+        FROM books 
+        ORDER BY rating ASC;
+
+Results:
+(1,)
+(2,)
+(3,)
+(4,)
+(5,)
+
+[Total Rows: 5]
+
+----------------------------------------------------
+Query: Query 3 (BETWEEN, WHERE, ORDER BY) - Books Priced Between £20 and £40 with Rating >= 4
+----------------------------------------------------
+SQL Query:
+SELECT title, price_gbp, rating 
+        FROM books 
+        WHERE price_gbp BETWEEN 20.00 AND 40.00 AND rating >= 4 
+        ORDER BY rating DESC, price_gbp ASC 
+        LIMIT 5;
+
+Results:
+('Between Shades of Gray', 20.79, 5)
+('Voyager (Outlander #3)', 21.07, 5)
+('Saga, Volume 3 (Saga (Collected Editions) #3)', 21.57, 5)
+('The Silkworm (Cormoran Strike #2)', 23.05, 5)
+('What Happened on Beale Street (Secrets of the South Mysteries #2)', 25.37, 5)
+
+[Total Rows: 5]
+
+----------------------------------------------------
+Query: Query 4 (IN, WHERE, ORDER BY) - Top Rated Books in Specific Categories
+----------------------------------------------------
+SQL Query:
+SELECT title, rating, price_inr 
+        FROM books 
+        WHERE rating IN (4, 5) AND category_id IN (1, 2) 
+        ORDER BY price_inr DESC 
+        LIMIT 5;
+
+Results:
+("The No. 1 Ladies' Detective Agency (No. 1 Ladies' Detective Agency #1)", 4, 6087.35)
+('The Past Never Ends', 4, 5960.75)
+('A Flight of Arrows (The Pathfinders #2)', 5, 5858.42)
+('Murder at the 42nd Street Library (Raymond Ambler #1)', 4, 5734.98)
+("The Bachelor Girl's Guide to Murder (Herringford and Watts Mysteries #1)", 5, 5517.65)
+
+[Total Rows: 5]
+
+----------------------------------------------------
+Query: Query 5 (JOIN) - Complete Relational Books and Category Information
+----------------------------------------------------
+SQL Query:
+SELECT b.book_id, b.title, c.category_name, b.price_gbp, b.price_inr, b.rating, b.in_stock
+        FROM books b
+        JOIN categories c ON b.category_id = c.category_id
+        ORDER BY b.book_id ASC;
+
+Results:
+(134, 'Sharp Objects', 'Mystery', 47.82, 5045.01, 4, 1)
+(135, 'In a Dark, Dark Wood', 'Mystery', 19.63, 2070.96, 1, 1)
+(136, 'The Past Never Ends', 'Mystery', 56.5, 5960.75, 4, 1)
+(137, 'A Murder in Time', 'Mystery', 16.64, 1755.52, 1, 1)
+(138, 'The Murder of Roger Ackroyd (Hercule Poirot #4)', 'Mystery', 44.1, 4652.55, 4, 1)
+(139, 'The Last Mile (Amos Decker #2)', 'Mystery', 54.21, 5719.16, 2, 1)
+(140, 'That Darkness (Gardiner and Renner #1)', 'Mystery', 13.92, 1468.56, 1, 1)
+(141, 'Tastes Like Fear (DI Marnie Rome #3)', 'Mystery', 10.69, 1127.79, 1, 1)
+(142, 'A Time of Torment (Charlie Parker #14)', 'Mystery', 48.35, 5100.92, 5, 1)
+(143, 'A Study in Scarlet (Sherlock Holmes #1)', 'Mystery', 16.73, 1765.02, 2, 1)
+(144, 'Poisonous (Max Revere Novels #3)', 'Mystery', 26.8, 2827.4, 3, 1)
+(145, 'Murder at the 42nd Street Library (Raymond Ambler #1)', 'Mystery', 54.36, 5734.98, 4, 1)
+(146, 'Most Wanted', 'Mystery', 35.28, 3722.04, 3, 1)
+(147, 'Hide Away (Eve Duncan #20)', 'Mystery', 11.84, 1249.12, 1, 1)
+(148, 'Boar Island (Anna Pigeon #19)', 'Mystery', 59.48, 6275.14, 3, 1)
+(149, 'The Widow', 'Mystery', 27.26, 2875.93, 2, 1)
+(150, 'Playing with Fire', 'Mystery', 13.71, 1446.41, 3, 1)
+(151, 'What Happened on Beale Street (Secrets of the South Mysteries #2)', 'Mystery', 25.37, 2676.54, 5, 1)
+(152, "The Bachelor Girl's Guide to Murder (Herringford and Watts Mysteries #1)", 'Mystery', 52.3, 5517.65, 5, 1)
+(153, 'Delivering the Truth (Quaker Midwife Mystery #1)', 'Mystery', 20.89, 2203.9, 4, 1)
+(154, 'The Mysterious Affair at Styles (Hercule Poirot #1)', 'Mystery', 24.8, 2616.4, 4, 1)
+(155, 'In the Woods (Dublin Murder Squad #1)', 'Mystery', 38.38, 4049.09, 2, 1)
+(156, 'The Silkworm (Cormoran Strike #2)', 'Mystery', 23.05, 2431.78, 5, 1)
+(157, 'The Exiled', 'Mystery', 43.45, 4583.98, 3, 1)
+(158, "The Cuckoo's Calling (Cormoran Strike #1)", 'Mystery', 19.21, 2026.66, 1, 1)
+(159, 'Extreme Prey (Lucas Davenport #26)', 'Mystery', 25.4, 2679.7, 3, 1)
+(160, 'Career of Evil (Cormoran Strike #3)', 'Mystery', 24.72, 2607.96, 2, 1)
+(161, "The No. 1 Ladies' Detective Agency (No. 1 Ladies' Detective Agency #1)", 'Mystery', 57.7, 6087.35, 4, 1)
+(162, 'The Girl You Lost', 'Mystery', 12.29, 1296.59, 5, 1)
+(163, 'The Girl In The Ice (DCI Erika Foster #1)', 'Mystery', 15.85, 1672.18, 3, 1)
+(164, 'Blood Defense (Samantha Brinkman #1)', 'Mystery', 20.3, 2141.65, 3, 1)
+(165, "1st to Die (Women's Murder Club #1)", 'Mystery', 53.98, 5694.89, 1, 1)
+(166, 'Tipping the Velvet', 'Historical Fiction', 53.74, 5669.57, 1, 1)
+(167, 'Forever and Forever: The Courtship of Henry Longfellow and Fanny Appleton', 'Historical Fiction', 29.69, 3132.3, 3, 1)
+(168, 'A Flight of Arrows (The Pathfinders #2)', 'Historical Fiction', 55.53, 5858.42, 5, 1)
+(169, 'The House by the Lake', 'Historical Fiction', 36.95, 3898.23, 1, 1)
+(170, 'Mrs. Houdini', 'Historical Fiction', 30.25, 3191.38, 5, 1)
+(171, 'The Marriage of Opposites', 'Historical Fiction', 28.08, 2962.44, 4, 1)
+(172, 'Glory over Everything: Beyond The Kitchen House', 'Historical Fiction', 45.84, 4836.12, 3, 1)
+(173, 'Love, Lies and Spies', 'Historical Fiction', 20.55, 2168.02, 2, 1)
+(174, 'A Paris Apartment', 'Historical Fiction', 39.01, 4115.55, 4, 1)
+(175, 'Lilac Girls', 'Historical Fiction', 17.28, 1823.04, 2, 1)
+(176, 'The Constant Princess (The Tudor Court #1)', 'Historical Fiction', 16.62, 1753.41, 3, 1)
+(177, 'The Invention of Wings', 'Historical Fiction', 37.34, 3939.37, 1, 1)
+(178, 'World Without End (The Pillars of the Earth #2)', 'Historical Fiction', 32.97, 3478.34, 4, 1)
+(179, 'The Passion of Dolssa', 'Historical Fiction', 28.32, 2987.76, 5, 1)
+(180, 'Girl With a Pearl Earring', 'Historical Fiction', 26.77, 2824.24, 1, 1)
+(181, 'Voyager (Outlander #3)', 'Historical Fiction', 21.07, 2222.89, 5, 1)
+(182, 'The Red Tent', 'Historical Fiction', 35.66, 3762.13, 5, 1)
+(183, 'The Last Painting of Sara de Vos', 'Historical Fiction', 55.55, 5860.52, 2, 1)
+(184, 'The Guernsey Literary and Potato Peel Pie Society', 'Historical Fiction', 49.53, 5225.42, 1, 1)
+(185, 'Girl in the Blue Coat', 'Historical Fiction', 46.83, 4940.56, 2, 1)
+(186, 'Between Shades of Gray', 'Historical Fiction', 20.79, 2193.34, 5, 1)
+(187, 'While You Were Mine', 'Historical Fiction', 41.32, 4359.26, 5, 1)
+(188, 'The Secret Healer', 'Historical Fiction', 34.56, 3646.08, 3, 1)
+(189, 'Starlark', 'Historical Fiction', 25.83, 2725.06, 3, 1)
+(190, 'Lost Among the Living', 'Historical Fiction', 27.7, 2922.35, 4, 1)
+(191, "A Spy's Devotion (The Regency Spies of London #1)", 'Historical Fiction', 16.97, 1790.33, 5, 1)
+(192, "Scott Pilgrim's Precious Little Life (Scott Pilgrim #1)", 'Sequential Art', 52.29, 5516.6, 5, 1)
+(193, 'Tsubasa: WoRLD CHRoNiCLE 2 (Tsubasa WoRLD CHRoNiCLE #2)', 'Sequential Art', 16.28, 1717.54, 1, 1)
+(194, 'This One Summer', 'Sequential Art', 19.49, 2056.19, 4, 1)
+(195, 'The Nameless City (The Nameless City #1)', 'Sequential Art', 38.16, 4025.88, 4, 1)
+(196, 'Saga, Volume 5 (Saga (Collected Editions) #5)', 'Sequential Art', 51.04, 5384.72, 2, 1)
+(197, 'Rat Queens, Vol. 3: Demons (Rat Queens (Collected Editions) #11-15)', 'Sequential Art', 50.4, 5317.2, 3, 1)
+(198, 'Princess Jellyfish 2-in-1 Omnibus, Vol. 01 (Princess Jellyfish 2-in-1 Omnibus #1)', 'Sequential Art', 13.61, 1435.86, 5, 1)
+(199, 'Pop Gun War, Volume 1: Gift', 'Sequential Art', 18.97, 2001.33, 1, 1)
+(200, 'Patience', 'Sequential Art', 10.16, 1071.88, 3, 1)
+(201, 'Outcast, Vol. 1: A Darkness Surrounds Him (Outcast #1)', 'Sequential Art', 15.44, 1628.92, 4, 1)
+(202, 'orange: The Complete Collection 1 (orange: The Complete Collection #1)', 'Sequential Art', 48.41, 5107.25, 1, 1)
+(203, 'Lumberjanes, Vol. 2: Friendship to the Max (Lumberjanes #5-8)', 'Sequential Art', 46.91, 4949.0, 2, 1)
+(204, 'Lumberjanes, Vol. 1: Beware the Kitten Holy (Lumberjanes #1-4)', 'Sequential Art', 45.61, 4811.85, 3, 1)
+(205, 'Lumberjanes Vol. 3: A Terrible Plan (Lumberjanes #9-12)', 'Sequential Art', 19.92, 2101.56, 2, 1)
+(206, 'I Hate Fairyland, Vol. 1: Madly Ever After (I Hate Fairyland (Compilations) #1-5)', 'Sequential Art', 29.17, 3077.44, 2, 1)
+(207, 'I am a Hero Omnibus Volume 1', 'Sequential Art', 54.63, 5763.46, 3, 1)
+(208, 'Giant Days, Vol. 2 (Giant Days #5-8)', 'Sequential Art', 22.11, 2332.6, 2, 1)
+(209, 'Danganronpa Volume 1', 'Sequential Art', 51.99, 5484.95, 4, 1)
+(210, 'Codename Baboushka, Volume 1: The Conclave of Death', 'Sequential Art', 36.72, 3873.96, 4, 1)
+(211, 'Camp Midnight', 'Sequential Art', 17.08, 1801.94, 4, 1)
+(212, 'Bitch Planet, Vol. 1: Extraordinary Machine (Bitch Planet (Collected Editions))', 'Sequential Art', 37.92, 4000.56, 2, 1)
+(213, 'The Shadow Hero (The Shadow Hero)', 'Sequential Art', 33.14, 3496.27, 1, 1)
+(214, 'Fables, Vol. 1: Legends in Exile (Fables #1)', 'Sequential Art', 41.62, 4390.91, 4, 1)
+(215, 'Batman: The Long Halloween (Batman)', 'Sequential Art', 36.5, 3850.75, 2, 1)
+(216, 'Batman: The Dark Knight Returns (Batman)', 'Sequential Art', 15.38, 1622.59, 5, 1)
+(217, 'Wonder Woman: Earth One, Volume One (Wonder Woman: Earth One #1)', 'Sequential Art', 37.34, 3939.37, 4, 1)
+(218, 'We Are Robin, Vol. 1: The Vigilante Business (We Are Robin #1)', 'Sequential Art', 53.9, 5686.45, 1, 1)
+(219, 'Through the Woods', 'Sequential Art', 25.38, 2677.59, 2, 1)
+(220, 'Superman Vol. 1: Before Truth (Superman by Gene Luen Yang #1)', 'Sequential Art', 11.89, 1254.4, 5, 1)
+(221, 'So Cute It Hurts!!, Vol. 6 (So Cute It Hurts!! #6)', 'Sequential Art', 35.43, 3737.86, 4, 1)
+(222, 'Robin War', 'Sequential Art', 47.82, 5045.01, 3, 1)
+(223, 'Red Hood/Arsenal, Vol. 1: Open for Business (Red Hood/Arsenal #1)', 'Sequential Art', 25.48, 2688.14, 2, 1)
+(224, 'Naruto (3-in-1 Edition), Vol. 14: Includes Vols. 40, 41 & 42 (Naruto: Omnibus #14)', 'Sequential Art', 38.39, 4050.14, 2, 1)
+(225, 'Lowriders to the Center of the Earth (Lowriders in Space #2)', 'Sequential Art', 51.51, 5434.3, 2, 1)
+(226, 'El Deafo', 'Sequential Art', 57.62, 6078.91, 5, 1)
+(227, 'Batman: Europa', 'Sequential Art', 32.01, 3377.06, 2, 1)
+(228, 'Art Ops Vol. 1', 'Sequential Art', 48.8, 5148.4, 3, 1)
+(229, 'Adulthood Is a Myth: A "Sarah\'s Scribbles" Collection', 'Sequential Art', 10.9, 1149.95, 2, 1)
+(230, 'Fruits Basket, Vol. 9 (Fruits Basket #9)', 'Sequential Art', 33.95, 3581.73, 4, 1)
+(231, 'Roller Girl', 'Sequential Art', 14.1, 1487.55, 5, 1)
+(232, 'Fruits Basket, Vol. 7 (Fruits Basket #7)', 'Sequential Art', 19.57, 2064.64, 1, 1)
+(233, 'Fruits Basket, Vol. 6 (Fruits Basket #6)', 'Sequential Art', 20.96, 2211.28, 4, 1)
+(234, 'Death Note, Vol. 6: Give-and-Take (Death Note #6)', 'Sequential Art', 36.39, 3839.14, 3, 1)
+(235, 'Fruits Basket, Vol. 5 (Fruits Basket #5)', 'Sequential Art', 16.33, 1722.81, 1, 1)
+(236, 'Death Note, Vol. 5: Whiteout (Death Note #5)', 'Sequential Art', 52.41, 5529.25, 1, 1)
+(237, 'The Demon Prince of Momochi House, Vol. 4 (The Demon Prince of Momochi House #4)', 'Sequential Art', 27.88, 2941.34, 2, 1)
+(238, 'Fruits Basket, Vol. 4 (Fruits Basket #4)', 'Sequential Art', 50.44, 5321.42, 4, 1)
+(239, 'The Wicked + The Divine, Vol. 3: Commercial Suicide (The Wicked + The Divine)', 'Sequential Art', 14.41, 1520.26, 3, 1)
+(240, 'The Sandman, Vol. 3: Dream Country (The Sandman (volumes) #3)', 'Sequential Art', 55.55, 5860.52, 5, 1)
+(241, 'Saga, Volume 3 (Saga (Collected Editions) #3)', 'Sequential Art', 21.57, 2275.64, 5, 1)
+(242, 'Prodigy: The Graphic Novel (Legend: The Graphic Novel #2)', 'Sequential Art', 43.63, 4602.96, 3, 1)
+(243, 'Persepolis: The Story of a Childhood (Persepolis #1-2)', 'Sequential Art', 39.13, 4128.22, 1, 1)
+(244, 'Original Fake', 'Sequential Art', 31.45, 3317.98, 3, 1)
+(245, 'Grayson, Vol 3: Nemesis (Grayson #3)', 'Sequential Art', 42.72, 4506.96, 1, 1)
+(246, 'Fruits Basket, Vol. 3 (Fruits Basket #3)', 'Sequential Art', 45.17, 4765.44, 2, 1)
+(247, 'Black Butler, Vol. 1 (Black Butler #1)', 'Sequential Art', 49.31, 5202.2, 1, 1)
+(248, 'Awkward', 'Sequential Art', 38.02, 4011.11, 2, 1)
+(249, "The Sandman, Vol. 2: The Doll's House (The Sandman (volumes) #2)", 'Sequential Art', 54.81, 5782.46, 1, 1)
+(250, 'Saga, Volume 2 (Saga (Collected Editions) #2)', 'Sequential Art', 11.75, 1239.62, 3, 1)
+(251, 'Fruits Basket, Vol. 2 (Fruits Basket #2)', 'Sequential Art', 11.64, 1228.02, 5, 1)
+(252, 'Y: The Last Man, Vol. 1: Unmanned (Y: The Last Man #1)', 'Sequential Art', 18.51, 1952.8, 4, 1)
+(253, 'The Wicked + The Divine, Vol. 1: The Faust Act (The Wicked + The Divine)', 'Sequential Art', 36.52, 3852.86, 2, 1)
+(254, 'The Sandman, Vol. 1: Preludes and Nocturnes (The Sandman (volumes) #1)', 'Sequential Art', 54.12, 5709.66, 3, 1)
+(255, 'The Complete Maus (Maus #1-2)', 'Sequential Art', 10.64, 1122.52, 3, 1)
+(256, 'Skip Beat!, Vol. 01 (Skip Beat! #1)', 'Sequential Art', 42.12, 4443.66, 3, 1)
+(257, 'Saga, Volume 1 (Saga (Collected Editions) #1)', 'Sequential Art', 28.48, 3004.64, 1, 1)
+(258, 'Rat Queens, Vol. 1: Sass & Sorcery (Rat Queens (Collected Editions) #1-5)', 'Sequential Art', 46.96, 4954.28, 5, 1)
+(259, 'Paper Girls, Vol. 1 (Paper Girls #1-5)', 'Sequential Art', 21.71, 2290.41, 4, 1)
+(260, 'Ouran High School Host Club, Vol. 1 (Ouran High School Host Club #1)', 'Sequential Art', 29.87, 3151.29, 3, 1)
+(261, 'Ms. Marvel, Vol. 1: No Normal (Ms. Marvel (2014-2015) #1)', 'Sequential Art', 39.39, 4155.65, 4, 1)
+(262, 'Hawkeye, Vol. 1: My Life as a Weapon (Hawkeye #1)', 'Sequential Art', 45.24, 4772.82, 3, 1)
+(263, 'Giant Days, Vol. 1 (Giant Days #1-4)', 'Sequential Art', 56.76, 5988.18, 4, 1)
+(264, 'Fruits Basket, Vol. 1 (Fruits Basket #1)', 'Sequential Art', 40.28, 4249.54, 5, 1)
+(265, 'Bleach, Vol. 1: Strawberry and the Soul Reapers (Bleach #1)', 'Sequential Art', 34.65, 3655.58, 5, 1)
+(266, 'Ajin: Demi-Human, Volume 1 (Ajin: Demi-Human #1)', 'Sequential Art', 57.06, 6019.83, 4, 1)
+
+[Total Rows: 133]
+
+====================================================
+Pandas vs SQL Equivalence Verification: True
+====================================================
