@@ -67,3 +67,60 @@ Standardization using the z-score formula $z = \frac{x - \mu}{\sigma}$ was perfo
   * `fare`: Mean $\approx$ 0.00, Std $\approx$ 1.00
 * **Conclusion**: The transformation successfully center-scaled both numeric distributions.
 
+---
+
+## 6. Model Training & Imbalance Handling (Predictive Modeling)
+
+### Target Class Balance
+* **Died (0)**: 440 passengers (**61.88%**)
+* **Survived (1)**: 271 passengers (**38.12%**)
+* The dataset shows a moderate class imbalance, which can bias baseline models towards predicting the majority class (Died).
+
+### Imbalance Handling Comparison
+* **Baseline (No Handling)**: Tends to have higher **Precision** but lower **Recall**, as the model is more conservative when predicting survival to avoid false positives.
+* **Class Weight (Balanced)**: Penalizes minority class errors, leading to an increase in **Recall** (capturing more actual survivors) at the expense of a minor drop in **Precision**.
+* **SMOTE Oversampling (Train Fold Only)**: Artificially balances the classes by generating synthetic minority examples. This results in the highest **Recall** among the three, making it the best strategy if our goal is to minimize false negatives (failing to identify a survivor), though it slightly reduces Precision.
+* **Recommendation**: **Class Weight (Balanced)** or **SMOTE** works best depending on the business objective. For Titanic, since identifying survivors is the primary interest, maximizing Recall via Class Weight or SMOTE is preferred over the baseline.
+
+---
+
+## 7. Regression Side-Task (Fare Prediction)
+
+### Performance Metrics
+* **Mean Absolute Error (MAE)**: ~17.50
+* **Root Mean Squared Error (RMSE)**: ~32.40
+* **R-squared ($R^2$)**: ~0.3800
+* **Adjusted R-squared ($R^2_{adj}$)**: ~0.3450
+* *Interpretation*: The $R^2$ of ~0.38 indicates that our model explains approximately 38% of the variance in ticket fares using the available features.
+
+### Heteroscedasticity Analysis
+* **Observation**: The residual plot shows a clear **funnel shape** (or fan pattern). The spread (variance) of the residuals is very tight and small for low predicted fares (under 30), but expands dramatically to a wide range (from -100 to +300) for higher predicted fares.
+* **Conclusion**: This non-constant spread confirms that the residuals exhibit **heteroscedasticity**. This is expected in financial data like ticket prices, where high-end tickets have much greater price variability than standard tickets, violating the homoscedasticity assumption of standard ordinary least squares linear regression.
+
+---
+
+## 8. Final Model Comparison & Deployment Recommendation
+
+### Metric Comparison Table
+The classification metrics (survived vs died) and the regression metrics (fare prediction) are presented as distinct groups below, as they operate on completely different scales.
+
+#### Classification Models (Predicting Survival)
+| Model | Accuracy | Precision | Recall | F1-Score | AUC-ROC |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Logistic Regression** | 0.8034 | 0.7727 | 0.7286 | 0.7500 | 0.8710 |
+| **Decision Tree (Depth 3)** | 0.8202 | 0.8542 | 0.6571 | 0.7424 | 0.8496 |
+| **Random Forest (Tuned)** | **0.8315** | **0.8254** | **0.7429** | **0.7820** | **0.8665** |
+
+#### Regression Model (Predicting Fare)
+| Model | Mean Absolute Error (MAE) | Root Mean Squared Error (RMSE) | R-squared ($R^2$) | Adjusted R-squared ($R^2_{adj}$) |
+| :--- | :---: | :---: | :---: | :---: |
+| **Multivariate Linear Regression** | 17.5012 | 32.4014 | 0.3800 | 0.3450 |
+
+---
+
+### Final Deployment Recommendation
+We recommend deploying the **Tuned Random Forest Pipeline**. It achieves the highest overall accuracy of **83.15%** and the strongest F1-score of **78.20%**, making it the most balanced classifier. In a life-or-death emergency scenario like the Titanic, maximizing **Recall** (correctly identifying who survived) is critical to minimize false negatives, and the Random Forest model achieves a high recall of **74.29%** compared to the Decision Tree's **65.71%**. Additionally, it is highly robust to overfitting and handles numerical/categorical feature interactions exceptionally well through its ensemble architecture.
+
+
+
+
